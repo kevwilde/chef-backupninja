@@ -15,10 +15,9 @@ e.g.
 
 Attributes
 ----------
-TODO: List your cookbook attributes here.
 
-e.g.
 #### backupninja::default
+
 <table>
   <tr>
     <th>Key</th>
@@ -27,17 +26,83 @@ e.g.
     <th>Default</th>
   </tr>
   <tr>
-    <td><tt>['backupninja']['bacon']</tt></td>
-    <td>Boolean</td>
-    <td>whether to include bacon</td>
-    <td><tt>true</tt></td>
+    <td><tt>['backupninja']['backupninja_package_name']</tt></td>
+    <td>String</td>
+    <td>Package name for backupninja</td>
+    <td><tt>'backupninja'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['rdiff_backup_package_name']</tt></td>
+    <td>String</td>
+    <td>Package name for rdiff-backup</td>
+    <td><tt>'rdiff-backup'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['loglevel']</tt></td>
+    <td>Integer</td>
+    <td>
+      Verbosity level for logging:
+      <ul>
+        <li>5: Debug and below</li>
+        <li>4: Information and below</li>
+        <li>3: Warnings and below</li>
+        <li>2: Errors and below</li>
+        <li>1: Fatal errors only</li>
+      </ul>
+    </td>
+    <td><tt>4</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['reportemail']</tt></td>
+    <td>String</td>
+    <td>Backup summaries will be emailed to this address</td>
+    <td><tt>'root'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['reportsuccess']</tt></td>
+    <td>String</td>
+    <td>When set to 'yes', a report email will be generated even
+    if there was no error.</td>
+    <td><tt>'yes'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['reportwarning']</tt></td>
+    <td>String</td>
+    <td>When set to 'yes', a report email will be generated even
+    if there was no error.</td>
+    <td><tt>'yes'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['logfile']</tt></td>
+    <td>String</td>
+    <td>All logs will be written to this file</td>
+    <td><tt>'/var/log/backupninja.log'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['configdirectory']</tt></td>
+    <td>String</td>
+    <td>Directory where all the backup configuration files live</td>
+    <td><tt>'/etc/backup.d'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['scriptdirectory']</tt></td>
+    <td>String</td>
+    <td>Where backupninja handler scripts are found</td>
+    <td><tt>/usr/share/backupninja'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['usecolors']</tt></td>
+    <td>String</td>
+    <td>Use colors in the log file</td>
+    <td><tt>'yes'</tt></td>
   </tr>
 </table>
 
 Usage
 -----
 #### backupninja::default
-TODO: Write usage instructions for each cookbook.
+
+Installs and configures a backupninja daemon on the machine. No backup tasks are added.
 
 e.g.
 Just include `backupninja` in your node's `run_list`:

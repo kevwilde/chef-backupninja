@@ -2,7 +2,21 @@
 # Cookbook Name:: backupninja
 # Recipe:: default
 #
-# Copyright 2014, YOUR_COMPANY_NAME
+# Copyright 2014, Kevin Van Wilder
 #
-# All rights reserved - Do Not Redistribute
 #
+# Installs backupninja on the machine.
+#
+
+package node['backupninja']['backupninja_package_name'] do
+	action :install
+end
+
+package node['backupninja']['rdiff_backup_package_name'] do
+	action :install
+end
+
+template node['backupninja']['general_configfile'] do
+	source 'backupninja.conf.erb'
+	owner 'root'
+end
