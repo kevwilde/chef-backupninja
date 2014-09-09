@@ -1,17 +1,113 @@
 backupninja Cookbook
 ====================
-TODO: Enter the cookbook description here.
+The main highlights of this cookbook are the resources for managing backups. The following providers are currently implemented:
 
-e.g.
-This cookbook makes your favorite breakfast sandwich.
+* `backupninja_rdiff`: backup action for rdiff-backup (incremental backups)
+* `backupninja_mysql`: backup action for safe MySQL dumps
 
 Requirements
 ------------
-TODO: List your cookbook requirements. Be sure to include any requirements this cookbook has on platforms, libraries, other cookbooks, packages, operating systems, etc.
 
-e.g.
-#### packages
-- `toaster` - backupninja needs toaster to brown your bagel.
+Chef version 0.11+
+
+Platforms
+---------
+
+* Ubuntu
+
+All other platforms are currently untested.
+
+Resources/Providers
+-------------------
+These resources aim to expose an abstraction layer for generating the ini-style configuration files necessary to configure a backup job in backupninja.
+
+If you wish to install backupninja, add the included `recipe[backupninja]` to your runlist or wrapper cookbook.
+
+#### backupninja
+
+Generic backupninja resource. This resource contains all the generic configuration data available in all the backup job-specific resources. This resource is in charge of the file naming-scheme and the generation of the INI-file.
+
+##### Actions
+
+* `:create`: create the ini file
+* `:delete`: removes the ini file
+
+##### Attribute Parameters
+
+* `name`: name attribute. Short descriptive name that will be used in the filename.
+* `priority`
+* `description`
+* `when_executed`
+* `type`: the extension of the INI-file indication which procedure for backup will be used.
+* `options`: Hash of additional values to appear in the INI-file.
+
+More information of about ordering, naming and scheduling can be found [here](https://labs.riseup.net/code/projects/backupninja/wiki/Configuration#Global-configuration).
+
+The `options` hash will be heavily used by the job-specific resources to fill in their additional parameters. 
+
+Generation of these options depends on the class type of the hash value being used:
+
+* Value is of type `Array`: A seperate "key = item" line will be generated for each item in the array.
+* Value is of type `Hash`: the key will be used as a section `[key]` and the value should again be of type Hash. Everything in that hash will be generated as attributes inside this section.
+* Everything else will simply be generated as "key = value"
+
+
+#### backupninja_rdiff
+
+Rdiff-specific job to make remote, incremental backups of the filesystem.
+
+##### Actions
+
+* :create: create the ini file
+* :delete: removes the ini file
+
+##### Attribute Parameters
+
+The following attribute parameters are present alongside those in the `backupninja` resource:
+
+The source section:
+* source_label, String
+* source_type, String
+* source_keep, Integer
+* source_include, Array
+* source_exclude, Array
+
+The dest (destination) section:
+* dest_type, String
+* dest_host, String
+* dest_directory, String
+* dest_user, String
+
+More information about these attributes can be found [here](https://labs.riseup.net/code/projects/backupninja/wiki/Rdiff).
+
+#### backupninja_mysql
+
+MySQL-specific job to backup a mysql database using mysqldump.
+
+##### Actions
+
+* :create: create the ini file
+* :delete: removes the ini file
+
+##### Attribute Parameters
+
+The following attribute parameters are present alongside those in the `backupninja` resource:
+
+* databases, String
+* backupdir, String
+* hotcopy, String
+* sqldump, String
+* sqldumpoptions, String
+* compress, String
+* nodata, String
+* vsname, String
+
+* user, String
+* dbusername, String
+* dbpassword, String
+* configfile, String
+
+More information about these attributes can be found [here](https://labs.riseup.net/code/projects/backupninja/wiki/Mysql).
 
 Attributes
 ----------
@@ -116,11 +212,17 @@ Just include `backupninja` in your node's `run_list`:
 }
 ```
 
+To Do
+-----
+
+* Make job-specific resources more DRY-er
+* Implement other job processes
+* Change all `'yes'` attribute parameters from strings to booleans.
+* Ensure only one of three allowed authorization techniques in the MySQL job can be configured in a resource.
+
 Contributing
 ------------
-TODO: (optional) If this is a public cookbook, detail the process for contributing. If this is a private cookbook, remove this section.
 
-e.g.
 1. Fork the repository on Github
 2. Create a named feature branch (like `add_component_x`)
 3. Write your change
@@ -130,4 +232,4 @@ e.g.
 
 License and Authors
 -------------------
-Authors: TODO: List authors
+Authors: Kevin Van Wilder <kevin@van-wilder.be>
