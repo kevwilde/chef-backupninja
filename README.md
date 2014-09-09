@@ -58,25 +58,25 @@ Rdiff-specific job to make remote, incremental backups of the filesystem.
 
 ##### Actions
 
-* :create: create the ini file
-* :delete: removes the ini file
+* `:create`: create the ini file
+* `:delete`: removes the ini file
 
 ##### Attribute Parameters
 
 The following attribute parameters are present alongside those in the `backupninja` resource:
 
 The source section:
-* source_label, String
-* source_type, String
-* source_keep, Integer
-* source_include, Array
-* source_exclude, Array
+* `source_label`, String
+* `source_type`, String
+* `source_keep`, Integer
+* `source_include`, Array
+* `source_exclude`, Array
 
 The dest (destination) section:
-* dest_type, String
-* dest_host, String
-* dest_directory, String
-* dest_user, String
+* `dest_type`, String
+* `dest_host`, String
+* `dest_directory`, String
+* `dest_user`, String
 
 More information about these attributes can be found [here](https://labs.riseup.net/code/projects/backupninja/wiki/Rdiff).
 
@@ -86,26 +86,26 @@ MySQL-specific job to backup a mysql database using mysqldump.
 
 ##### Actions
 
-* :create: create the ini file
-* :delete: removes the ini file
+* `:create`: create the ini file
+* `:delete`: removes the ini file
 
 ##### Attribute Parameters
 
 The following attribute parameters are present alongside those in the `backupninja` resource:
 
-* databases, String
-* backupdir, String
-* hotcopy, String
-* sqldump, String
-* sqldumpoptions, String
-* compress, String
-* nodata, String
-* vsname, String
+* `databases`, String
+* `backupdir`, String
+* `hotcopy`, String
+* `sqldump`, String
+* `sqldumpoptions`, String
+* `compress`, String
+* `nodata`, String
+* `vsname`, String
 
-* user, String
-* dbusername, String
-* dbpassword, String
-* configfile, String
+* `user`, String
+* `dbusername`, String
+* `dbpassword`, String
+* `configfile`, String
 
 More information about these attributes can be found [here](https://labs.riseup.net/code/projects/backupninja/wiki/Mysql).
 
