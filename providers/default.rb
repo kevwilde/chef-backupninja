@@ -12,6 +12,7 @@ action :create do
 			:description => new_resource.description
 		)
 		cookbook 'backupninja'
+		mode	0770
 	end
 end
 
