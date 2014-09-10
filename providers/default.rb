@@ -11,6 +11,7 @@ action :create do
 			:when_executed => new_resource.when_executed,
 			:description => new_resource.description
 		)
+		cookbook 'backupninja'
 	end
 end
 
