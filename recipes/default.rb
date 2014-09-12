@@ -8,11 +8,4 @@
 # Installs backupninja on the machine.
 #
 
-package node['backupninja']['backupninja_package_name'] do
-	action :install
-end
-
-template node['backupninja']['general_configfile'] do
-	source 'backupninja.conf.erb'
-	owner 'root'
-end
+include_recipe "backupninja::_install_and_configure"
