@@ -28,7 +28,7 @@ end
 file "/home/#{node['backupninja']['rdiff_backup_server_user']}/.ssh/authorized_keys" do
 	owner node['backupninja']['rdiff_backup_server_user']
 	mode '644'
-	content backup_nodes.map { |node| node['backupclient_pubkey'] }.join('\n')
+	content backup_nodes.map { |node| node['backupclient_pubkey'] }.join("\n")
 end
 
 directory node['backupninja']['rdiff_backup_server_directory'] do
