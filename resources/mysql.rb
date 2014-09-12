@@ -25,5 +25,6 @@ attribute :user, :kind_of => String
 
 attribute :dbusername, :kind_of => String
 attribute :dbpassword, :kind_of => String
+attribute :dbhost, :kind_of => String
 
 attribute :configfile, :kind_of => String

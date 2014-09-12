@@ -12,13 +12,14 @@ action :create do
 			'backupdir' => new_resource.backupdir,
 			'hotcopy' => new_resource.hotcopy,
 			'sqldump' => new_resource.sqldump,
-			'sqldumpoptions' => new_resource.sqldump,
+			'sqldumpoptions' => new_resource.sqldumpoptions,
 			'compress' => new_resource.compress,
 			'nodata' => new_resource.nodata,
 			'vsname' => new_resource.vsname,
 			'user' => new_resource.user,
 			'dbusername' => new_resource.dbusername,
 			'dbpassword' => new_resource.dbpassword,
+			'dbhost' => new_resource.dbhost,
 			'configfile' => new_resource.configfile,
 		})
 		action :create
