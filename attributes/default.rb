@@ -19,3 +19,7 @@ default['backupninja']['configdirectory'] = '/etc/backup.d'
 default['backupninja']['scriptdirectory'] = '/usr/share/backupninja'
 default['backupninja']['usecolors'] = 'yes'
 
+# Server Configuration
+
+default['backupninja']['rdiff_backup_server_user'] = 'backups'
+default['backupninja']['rdiff_backup_server_directory'] = '/backups'

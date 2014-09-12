@@ -114,6 +114,8 @@ Attributes
 
 #### backupninja::default
 
+Install and configure the backupninja daemon. 
+
 <table>
   <tr>
     <th>Key</th>
@@ -191,6 +193,53 @@ Attributes
     <td>String</td>
     <td>Use colors in the log file</td>
     <td><tt>'yes'</tt></td>
+  </tr>
+</table>
+
+
+#### backupninja::rdiff_backup_client
+
+The recipe will install the rdiff-backup package and generates an ssh keypair for the `root` user. The generated public key will be saved as a node attribute (`backupclient_pubkey`) so the backup server knows which public ssh keys it should authorize.
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['rdiff_backup_package_name']</tt></td>
+    <td>String</td>
+    <td>Package name for rdiff-backup</td>
+    <td><tt>'rdiff-backup'</tt></td>
+  </tr>
+</table>
+
+#### backupninja::rdiff_backup_server
+
+Use this recipe in the run list of the server that should receive the backups from the client.
+
+Basically, it will create a backup user and allow him access to the backup location. An `.ssh/authorized_keys` will be generated based on the `backupclient_pubkey` attribute found on all nodes known to the Chef Server to allow all backup clients access to send their backups.
+
+<table>
+  <tr>
+    <th>Key</th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Default</th>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['rdiff_backup_server_user']</tt></td>
+    <td>String</td>
+    <td>User used to connect to the backup server.</td>
+    <td><tt>'backupuser'</tt></td>
+  </tr>
+  <tr>
+    <td><tt>['backupninja']['rdiff_backup_server_directory']</tt></td>
+    <td>String</td>
+    <td>Directory where backups will be kept</td>
+    <td><tt>'/backups'</tt></td>
   </tr>
 </table>
 
