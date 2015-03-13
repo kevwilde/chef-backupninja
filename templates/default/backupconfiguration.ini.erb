@@ -22,14 +22,14 @@ when = <%= @when_executed %>
 @options.each_pair do |key, value|
 
 	# A repetition of the same key
-	if value.class == Array 
+	if value.class <= Array 
 		value.each do |item| 
 %><%= 		"#{key} = #{item}" %>
 <%
 		end
 
 	# A Section
-	elsif value.class == Hash
+	elsif value.class <= Hash
 %>
 
 <%=   "[#{key}]" %>
@@ -37,7 +37,7 @@ when = <%= @when_executed %>
 		value.each_pair do |sub_key, sub_value|
 			unless sub_value.nil?
 				# (inside) A repetition of the same key
-				if sub_value.class == Array 
+				if sub_value.class <= Array 
 					sub_value.each do |item| 
 %><%=   				"#{sub_key} = #{item}" %>
 <%		
