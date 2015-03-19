@@ -4,6 +4,7 @@ The main highlights of this cookbook are the resources for managing backups. The
 
 * `backupninja_rdiff`: backup action for rdiff-backup (incremental backups)
 * `backupninja_mysql`: backup action for safe MySQL dumps
+* `backupninja_pgsql`: backup action for safe PostgreSQL dumps
 
 Requirements
 ------------
@@ -43,7 +44,7 @@ Generic backupninja resource. This resource contains all the generic configurati
 
 More information of about ordering, naming and scheduling can be found [here](https://labs.riseup.net/code/projects/backupninja/wiki/Configuration#Global-configuration).
 
-The `options` hash will be heavily used by the job-specific resources to fill in their additional parameters. 
+The `options` hash will be heavily used by the job-specific resources to fill in their additional parameters.
 
 Generation of these options depends on the class type of the hash value being used:
 
@@ -109,12 +110,32 @@ The following attribute parameters are present alongside those in the `backupnin
 
 More information about these attributes can be found [here](https://labs.riseup.net/code/projects/backupninja/wiki/Mysql).
 
-Attributes
+#### backupninja_pgsql
+
+PostgreSQL-specific job to backup a PostgreSQL database.
+
+##### Actions
+
+* `:create`: create the ini file
+* `:delete`: removes the ini file
+
+##### Attribute Parameters
+
+The following attribute parameters are present alongside those in the `backupninja` resource:
+
+* `databases`, String
+* `backupdir`, String
+* `compress`, String
+* `vsname`, String
+
+More information about these attributes can be found [here](https://labs.riseup.net/code/projects/backupninja/wiki/Pgsql).
+
+Recipes
 ----------
 
 #### backupninja::default
 
-Install and configure the backupninja daemon. 
+Install and configure the backupninja daemon.
 
 <table>
   <tr>
@@ -195,6 +216,8 @@ Install and configure the backupninja daemon.
     <td><tt>'yes'</tt></td>
   </tr>
 </table>
+
+
 
 
 #### backupninja::rdiff_backup_client
